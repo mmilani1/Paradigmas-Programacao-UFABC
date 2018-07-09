@@ -1,0 +1,85 @@
+
+==================== FINAL INTERFACE ====================
+2018-06-28 05:02:01.96361 UTC
+
+interface main:Cesar 8022
+  interface hash: 30c6e996823613203773cff020dbb6da
+  ABI hash: 967aacee6f4a0ef9bc4ea98bb5c885d0
+  export-list hash: bfba25f229b3631e058c125ebeecd6e6
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: e30285035aba1081540a2e662a9422d0
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Cesar.chisqr
+  Cesar.count
+  Cesar.crack
+  Cesar.encode
+  Cesar.freqs
+  Cesar.int2let
+  Cesar.let2int
+  Cesar.lowers
+  Cesar.percent
+  Cesar.positions
+  Cesar.rotate
+  Cesar.shift
+  Cesar.table
+module dependencies:
+package dependencies: base-4.10.1.0* ghc-prim-0.5.1.1
+                      integer-gmp-1.0.1.0
+orphans: base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Either base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Type.Equality base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats
+import  -/  base-4.10.1.0:Data.Char fe4e3458190deeac19969ce15e33bed9
+import  -/  base-4.10.1.0:Data.Foldable 9ed87455d68e87ff2b5b8725eae9897e
+import  -/  base-4.10.1.0:Data.List 4ab7fa2a1b87502b23af891a384f0506
+import  -/  base-4.10.1.0:Data.OldList 555420b092ca8cf0a8f9666bc0e07dcf
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:GHC.Char 630ee80a10729165b02c0abeda9c6526
+import  -/  base-4.10.1.0:GHC.List e3060fbeb44ce0038e6b4dedf2dd9cf1
+import  -/  base-4.10.1.0:GHC.Num 6e1dc5d36d99a802edb39b92bb1923b8
+import  -/  base-4.10.1.0:GHC.Real 3c62834bc25e762eabc44149c4cc142d
+import  -/  base-4.10.1.0:GHC.Unicode 49c9de4fffed0d9be65aaeb6a60b757c
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  ghc-prim-0.5.1.1:GHC.Classes 93e2660065dce9329577e83d76d8f0d4
+d76519a3ea4e1c604923ab03afa9fc01
+  $trModule :: GHC.Types.Module
+42c30435adfc00b110164186bef97253
+  chisqr :: [GHC.Types.Float] -> [GHC.Types.Float] -> GHC.Types.Float
+cfb025f64c12aaa39d5fd520bc42ea60
+  count :: GHC.Types.Char -> GHC.Base.String -> GHC.Types.Int
+258163ca665cbce5c6eb0750d50d9300
+  crack :: GHC.Base.String -> GHC.Base.String
+7d1cc7cdf4f0ca8e2683a3f8b4ea7ca7
+  encode :: GHC.Types.Int -> GHC.Base.String -> GHC.Base.String
+11324fc62144ae9ee5a496e3658be402
+  freqs :: GHC.Base.String -> [GHC.Types.Float]
+73c424b5e8e6b4a884570035c5e750a7
+  int2let :: GHC.Types.Int -> GHC.Types.Char
+220018226b6feb0540a99e9051eb602b
+  let2int :: GHC.Types.Char -> GHC.Types.Int
+409112e9825ae8190cbde69094482841
+  lowers :: GHC.Base.String -> GHC.Types.Int
+9650e1f1ecd72aebb5d074fe8f2eec11
+  percent :: GHC.Types.Int -> GHC.Types.Int -> GHC.Types.Float
+53cba552fa9fdc30e7c0fd4ea4c6c274
+  positions :: GHC.Classes.Eq a => a -> [a] -> [GHC.Types.Int]
+8e2db10196c14d233f647e0e59110d0c
+  rotate :: GHC.Types.Int -> [a] -> [a]
+6b5164c94fb0a269a4be6a306eb8924c
+  shift :: GHC.Types.Int -> GHC.Types.Char -> GHC.Types.Char
+c0dc59186aa24c54a9c367a11c19ca4e
+  table :: [GHC.Types.Float]
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

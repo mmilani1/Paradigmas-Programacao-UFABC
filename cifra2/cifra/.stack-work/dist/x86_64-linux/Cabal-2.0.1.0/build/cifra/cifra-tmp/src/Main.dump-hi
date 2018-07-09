@@ -1,0 +1,76 @@
+
+==================== FINAL INTERFACE ====================
+2018-07-07 21:14:24.0677 UTC
+
+interface main:Main 8022
+  interface hash: 74dd465a43215a7b8d6cd6347e8baee6
+  ABI hash: 157ec2798497a249ec49b649b51c7988
+  export-list hash: bdf3799bae69b7c165d7ca926866d87b
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 44158f0c29e9867501bfe840e9a90d74
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.main
+module dependencies: Cesar Test
+package dependencies: QuickCheck-2.10.1 array-0.5.2.0
+                      base-4.10.1.0* containers-0.5.10.2 deepseq-1.4.3.0
+                      ghc-boot-th-8.2.2 ghc-prim-0.5.1.1 integer-gmp-1.0.1.0
+                      pretty-1.1.3.3 primitive-0.6.4.0 random-1.1
+                      template-haskell-2.12.0.0 tf-random-0.5 time-1.8.0.2
+                      transformers-0.5.2.0
+orphans: transformers-0.5.2.0:Control.Monad.Trans.Error
+         time-1.8.0.2:Data.Time.Format.Parse
+         time-1.8.0.2:Data.Time.LocalTime.Internal.ZonedTime
+         time-1.8.0.2:Data.Time.LocalTime.Internal.LocalTime
+         time-1.8.0.2:Data.Time.Calendar.Gregorian base-4.10.1.0:GHC.Float
+         base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Complex base-4.10.1.0:Data.Either
+                         base-4.10.1.0:Data.Functor.Compose base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity
+                         base-4.10.1.0:Data.Functor.Product base-4.10.1.0:Data.Functor.Sum
+                         base-4.10.1.0:Data.List.NonEmpty base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Semigroup base-4.10.1.0:Data.Type.Equality
+                         base-4.10.1.0:Data.Version base-4.10.1.0:Data.Void
+                         base-4.10.1.0:GHC.Exts base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats containers-0.5.10.2:Data.IntMap.Internal
+                         containers-0.5.10.2:Data.IntSet.Internal
+                         containers-0.5.10.2:Data.Map.Internal
+                         containers-0.5.10.2:Data.Sequence.Internal
+                         containers-0.5.10.2:Data.Set.Internal
+                         ghc-boot-th-8.2.2:GHC.ForeignSrcLang.Type
+                         ghc-boot-th-8.2.2:GHC.LanguageExtensions.Type
+                         pretty-1.1.3.3:Text.PrettyPrint.Annotated.HughesPJ
+                         pretty-1.1.3.3:Text.PrettyPrint.HughesPJ
+                         primitive-0.6.4.0:Control.Monad.Primitive
+                         primitive-0.6.4.0:Data.Primitive.ByteArray
+                         template-haskell-2.12.0.0:Language.Haskell.TH.Syntax
+import  -/  QuickCheck-2.10.1:Test.QuickCheck 0615fee573d7ebd8b2239421b64342c0
+import  -/  QuickCheck-2.10.1:Test.QuickCheck.Test 61c201458c43f8ac69a3c249dbc6b154
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  base-4.10.1.0:System.IO 6e5bb580370d8d71dc5888f723cea4b4
+import  -/  ghc-prim-0.5.1.1:GHC.Types b1fd0716441595db508c1a74387bf394
+import  -/  Cesar 967aacee6f4a0ef9bc4ea98bb5c885d0
+  exports: bfba25f229b3631e058c125ebeecd6e6
+  crack 258163ca665cbce5c6eb0750d50d9300
+  encode 7d1cc7cdf4f0ca8e2683a3f8b4ea7ca7
+import  -/  Test e0cf6c757191a1433a0ef0757d21e4eb
+  exports: 39fa00c0cf6564613b038e5506e340ea
+  prop_enc_length fdcdeaa1add24e2b718faec29838d4e2
+  prop_neg_shift f179464494ba0f7e849df87630fdabce
+abb025fa105599d3dc5168bd703c0653
+  $trModule :: GHC.Types.Module
+1ecb270cb7abe920603f26ebb081f978
+  main :: GHC.Types.IO ()
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+
