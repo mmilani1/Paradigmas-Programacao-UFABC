@@ -19,4 +19,4 @@ prob s c
 
 probabilidades :: String -> [(Char,Float)]
 probabilidades [] = []
-probabilidades s = prob s (head s) : probabilidades (filter (/=head s) s)
+probabilidades s = mySort (prob s (head s) : probabilidades (filter (/=head s) s))
