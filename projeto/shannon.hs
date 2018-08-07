@@ -93,4 +93,6 @@ encode fileName = do
 main :: IO ()
 main = do
     (original, codificado) <- encode "teste.txt"
+    handleOutput <- openBinaryFile "codificado.b" WriteMode
+    hPutStr handleOutput codificado
     print (original ++ " -> " ++ codificado)
