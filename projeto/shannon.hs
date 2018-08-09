@@ -1,7 +1,6 @@
-module Main where
-
 import Data.Function (on)
-import Data.List (sortBy)
+import Data.List     (sortBy)
+import Data.List     (nub)
 import System.IO
 
 first :: (a,b,c) -> a
@@ -18,20 +17,7 @@ mySort = sortBy (flip compare `on` second)
 
 removePunc :: String -> String
 removePunc xs = filter (/='\n') xs
-
 --[ x | x <- xs, not (x `elem` " '\n',.?!-_+:;\'/'<>") ]
-
---finaltupla :: [Char] -> [String] -> [(Char,String)]
---finaltupla tc td ts =  zip3  tc td ts
-
---comp ::  Int
---comp   = length text
-
---tuplachar :: (Char,Double,String) -> Char
---tuplachar tc = first tc
-
---tupladouble :: (Char,Double,String) -> Double
---tupladouble td = second td
 
 prob :: String -> Char -> Int -> (Char,Double,String)
 prob s d comp
@@ -40,12 +26,17 @@ prob s d comp
     where
         existe = length (filter (==d) s)
 
+--letras :: String -> [Char]
+--letras conteudo = nub conteudo
+
 probabilidades :: String -> Int -> [(Char,Double,String)]
-probabilidades [] _ = []
+probabilidades [] _    = []
 probabilidades s  comp = mySort (prob s (head s) comp : probabilidades (filter (/=head s) s) comp)
 
 data Tree = Leaf String | Node [String] (Tree) (Tree)
               deriving (Eq, Ord, Show, Read)
+
+type Codificacao = [(Char, String)]
 
 --prop = [p | (c,p,s) <- probabilidades text comp]
 --cod  = [s | (c,p,s) <- probabilidades text comp]
@@ -57,15 +48,15 @@ data Tree = Leaf String | Node [String] (Tree) (Tree)
 --       i = quebra prop
 
 arvore :: [String] -> [Double] -> Tree
-arvore [a] _ = Leaf a
+arvore [a] _    = Leaf a
 arvore cod prop = Node cod (arvore (map (++"0") (take i cod)) (take i prop)) (arvore (map (++"1") (drop i cod)) (drop i prop))
     where
         i = quebra prop
 
 listaFolhas :: Tree -> [String]
-listaFolhas (Leaf a) = [a]
+listaFolhas (Leaf a)         = [a]
 listaFolhas (Node n esq dir) = listaFolhas esq ++ listaFolhas dir
- 
+
 quebra :: [Double] -> Int
 quebra (p1:ps) = quebra' (p1:ps) 1 (abs(p1-(sum ps)))
     where
@@ -73,26 +64,59 @@ quebra (p1:ps) = quebra' (p1:ps) 1 (abs(p1-(sum ps)))
         quebra' (p1:p2:ps) i diff  | abs((p1+p2)-sum ps) >= diff = i
                                    | otherwise                   = quebra' ((p1+p2):ps) (i+1) (abs((p1+p2)-sum ps))
 
-subst :: String -> [(Char,String)] -> String  
-subst [] cod     = []
-subst (l:ls) cod = head ( [c | (a,c) <- cod, l == a] ) ++ subst ls cod
+eSubst :: String -> Codificacao -> String
+eSubst [] cod     = []
+eSubst (l:ls) cod = head ( [c | (a,c) <- cod, l == a] ) ++ eSubst ls cod
 
-encode :: FilePath -> IO (String,String)
-encode fileName = do
-    inputHandle         <- openFile fileName ReadMode
-    text                <- hGetContents inputHandle
-    let newtext         = removePunc text
-    let comp            = length newtext
-    let listaProb       = [p | (c,p,s) <- probabilidades (text) comp]
-    let listaCodVazio   = [s | (c,p,s) <- probabilidades (text) comp]
-    let listaChar       = [c | (c,p,s) <- probabilidades newtext comp]
-    let listaCod        = listaFolhas $ arvore listaCodVazio listaProb
-    let listaTuplaFinal = zip listaChar listaCod
-    return (text, subst newtext listaTuplaFinal)
+--dSubst :: String -> [(Char,String)] -> String
+--dSubst [] cod     = []
+--dSubst (l:ls) cod | l == head ( [a | (a,c) <- cod, l == head c] )  =  head ( [c | (a,c) <- cod, l == a] ) ++ dSubst ls cod
+--                  | otherwise = dSubst ls cod
 
-main :: IO ()
-main = do
-    (original, codificado) <- encode "teste.txt"
-    handleOutput <- openBinaryFile "codificado.b" WriteMode
-    hPutStr handleOutput codificado
-    print (original ++ " -> " ++ codificado)
+dic :: String -> Codificacao -> String
+dic "" _                = ""
+dic codigo listaCharCod = [l | (l,c) <- listaCharCod, codigo == c]
+
+dSubst :: String -> Codificacao -> String
+dSubst [] _     = []
+dSubst s cod    = dSubst' s cod "" ""
+    where
+        dSubst' [] cod teste decod       = decod ++ (dic teste cod)
+        dSubst' (s:ss) cod teste decod   | (dic teste cod) /= "" = dSubst' (s:ss) (cod) ("") (decod ++ (dic teste cod))
+                                         | otherwise             = dSubst' ss cod (teste ++ [s]) decod
+
+gerador :: String -> IO (String, Codificacao)                                         
+gerador fileName = do
+    inputHandle                 <- openFile fileName ReadMode
+    text                        <- hGetContents inputHandle
+    let newtext                 =  text
+    let comp                    =  length newtext
+    let listaProb               =  [p | (c,p,s) <- probabilidades newtext comp]
+    let listaCodVazio           =  [s | (c,p,s) <- probabilidades newtext comp]
+    let listaChar               =  [c | (c,p,s) <- probabilidades newtext comp]
+    let listaCod                =  listaFolhas $ arvore listaCodVazio listaProb
+    let listaCharCod            =  zip listaChar listaCod
+    handleOutput                <- openBinaryFile "codificacao.txt" WriteMode
+    hPutStr handleOutput (show listaCharCod)
+    hClose handleOutput
+    hClose inputHandle
+    return (newtext, listaCharCod)
+
+encode :: String -> IO()
+encode inputFileName = do
+    (t_original,listaCharCod)           <- gerador inputFileName
+    let t_codificado                    =  eSubst t_original listaCharCod
+    handleOutput                        <- openBinaryFile "codificado.txt" WriteMode
+    hPutStr handleOutput t_codificado
+    hClose handleOutput
+
+decode :: String -> String -> IO ()
+decode encodedFileName hashFileName = do
+    t_codificado                            <- readFile encodedFileName
+    handlelistaCharCod                      <- readFile hashFileName
+    let listaCharCod                        =  read handlelistaCharCod :: Codificacao
+    let t_decodificado                      =  dSubst t_codificado listaCharCod
+    handleOutput                            <- openBinaryFile "decodificado.txt" WriteMode
+    hPutStr handleOutput t_decodificado
+    hClose handleOutput
+
