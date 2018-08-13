@@ -159,8 +159,8 @@ main = do
   if args == [] then do
 
     putStrLn ("Instruções: ")
-    putStrLn ("Para codificar, execute stack exec -- shannon e (nome do arquivo de texto)")
-    putStrLn ("Para decodificar, execute stack exec -- shannon d (nome do arquivo codificado) (nome do arquivo com a lista de codigos)")
+    putStrLn ("Para codificar, execute stack exec -- shannon encode (nome do arquivo de texto)")
+    putStrLn ("Para decodificar, execute stack exec -- shannon decode (nome do arquivo codificado) (nome do arquivo com a lista de codigos)")
 
     else
       if (args !! 0 == "encode") then do
