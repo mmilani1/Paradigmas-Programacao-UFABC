@@ -1,7 +1,10 @@
+module Main where
+
 import Data.Function (on)
 import Data.List     (sortBy)
 import Data.List     (nub)
 import System.IO
+import System.Environment
 
 first :: (a,b,c) -> a
 first(x,_,_) = x
@@ -85,7 +88,7 @@ dSubst s cod    = dSubst' s cod "" ""
         dSubst' (s:ss) cod teste decod   | (dic teste cod) /= "" = dSubst' (s:ss) (cod) ("") (decod ++ (dic teste cod))
                                          | otherwise             = dSubst' ss cod (teste ++ [s]) decod
 
-gerador :: String -> IO (String, Codificacao)                                         
+gerador :: String -> IO (String, Codificacao)
 gerador fileName = do
     inputHandle                 <- openFile fileName ReadMode
     text                        <- hGetContents inputHandle
@@ -120,3 +123,26 @@ decode encodedFileName hashFileName = do
     hPutStr handleOutput t_decodificado
     hClose handleOutput
 
+main = do
+  args <- getArgs
+  if args == [] then do
+
+    putStrLn ("Instruções: ")
+    putStrLn ("Para codificar, execute stack exec -- shannon e (nome do arquivo de texto)")
+    putStrLn ("Para decodificar, execute stack exec -- shannon d (nome do arquivo codificado) (nome do arquivo com a lista de codigos)")
+
+    else
+      if (args !! 0 == "encode") then do
+
+        let nomeTexto = args !! 1
+        encode nomeTexto
+
+        else
+          if (args !! 0 == "decode") then do
+
+            let codificado = args !! 1
+            let codificacao = args !! 2
+            decode codificado codificacao
+
+            else
+              putStrLn "Argumentos errados"
